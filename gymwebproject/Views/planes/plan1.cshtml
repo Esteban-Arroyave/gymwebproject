@@ -1,0 +1,126 @@
+﻿
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title></title>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #2c3e50;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #1f2a38;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            width: 100vw;
+        }
+
+        .navbar-brand,
+        .nav-link,
+        .dropdown-item {
+            color: #ecf0f1 !important;
+        }
+
+        .dropdown-menu {
+            background-color: #34495e;
+            border: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #3d566e;
+        }
+
+        .carousel-item img {
+            max-height: 450px;
+            object-fit: cover;
+            filter: brightness(0.85);
+        }
+    </style>
+
+    </head>
+    <body>
+
+
+    <nav class="navbar navbar-expand-lg navbar-dark w-100">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold" href="#">GYMSTYLO</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menuNav">
+                <ul class="navbar-nav ms-auto">
+
+
+                    <!-- Menú Cuenta -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cuenta
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <form asp-action="Index" asp-controller="Home" method="get" class="dropdown-item m-0 p-0">
+                                    <button type="submit" class="dropdown-item">Iniciar sesión</button>
+                                </form>
+                            </li>
+                            <li>
+                                <form asp-action="Registro" asp-controller="Login" method="get" class="dropdown-item m-0 p-0">
+                                    <button type="submit" class="dropdown-item">Registrarse</button>
+                                </form>
+                            </li>
+                            <li><hr class="dropdown-divider" /></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br />
+    <br />
+
+    <div class="container text-center">
+        <div class="row align-items-start">
+            <div class="col border border-dark">
+                <p class="fs-3">Suscripcion Bronce</p>
+                <hr style="height: 3px; background-color: black; border: none; width: 100%;">
+                <div>negros de mierda</div>
+
+                <button style="background-color: brown; color: white; padding: 10px 20px; border: none; border-radius: 5px;">
+                    Comprar
+                </button>
+
+
+            </div>
+
+            <div class="col-1">
+            </div>
+
+
+            <div class="col border border-dark">
+                <p class="fs-3">Suscripcion Plata</p>
+                <hr style="height: 3px; background-color: black; border: none; width: 100%;">
+
+                <div> holaaaaa  </div>
+
+                <button type="button" class="btn btn-secondary " style="padding: 10px 20px; border: none; border-radius: 5px;">Comprar</button>
+
+            </div>
+
+            <div class="col-1">
+            </div>
+
+            <div class="col border border-dark">
+                <p class="fs-3">Suscripcion Oro</p>
+                <hr style="height: 3px; background-color: black; border: none; width: 100%;">
+                <button type="button" class="btn btn-warning" style="padding: 10px 20px; border: none; border-radius: 5px;">Comprar</button>
+
+            </div>
+        </div>
+    </div>
+
+    </body>
+    </html>

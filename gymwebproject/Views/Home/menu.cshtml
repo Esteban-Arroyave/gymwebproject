@@ -1,0 +1,137 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            color: #2c3e50;
+        }
+
+        .navbar {
+            background-color: #1f2a38;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            width: 100vw;
+        }
+
+        .navbar-brand,
+        .nav-link,
+        .dropdown-item {
+            color: #ecf0f1 !important;
+        }
+
+        .dropdown-menu {
+            background-color: #34495e;
+            border: none;
+        }
+
+        .dropdown-item:hover {
+            background-color: #3d566e;
+        }
+
+       
+        .carousel,
+        .carousel-inner,
+        .carousel-item,
+        .carousel-item img {
+            width: 100vw;
+        }
+
+        .carousel-item {
+            height: 500px; 
+        }
+
+            .carousel-item img {
+                height: 100%;
+                object-fit: cover;
+                filter: brightness(0.9);
+            }
+
+        .no-padding {
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+<body class="no-padding">
+
+    <nav class="navbar navbar-expand-lg navbar-dark w-100">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold" href="#">GYMSTYLO</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav" aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menuNav">
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item me-2">
+                        <form asp-action="Plan1" asp-controller="Planes" method="get">
+                            <button type="submit" class="btn btn-outline-light">Ofertas</button>
+                        </form>
+                    </li>
+
+                
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cuenta
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <form asp-action="Index" asp-controller="Home" method="get" class="dropdown-item m-0 p-0">
+                                    <button type="submit" class="dropdown-item">Iniciar sesión</button>
+                                </form>
+                            </li>
+                            <li>
+                                <form asp-action="Registro" asp-controller="Login" method="get" class="dropdown-item m-0 p-0">
+                                    <button type="submit" class="dropdown-item">Registrarse</button>
+                                </form>
+                            </li>
+                            <li><hr class="dropdown-divider" /></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <div>
+        <div id="carouselExampleFade" class="carousel slide carousel-fade w-100" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/css/descarga (1).jpg" alt="Imagen 1" />
+                </div>
+                <div class="carousel-item">
+                    <img src="/css/descarga.jpg" alt="Imagen 2" />
+                </div>
+                <div class="carousel-item">
+                    <img src="/css/download.jpg" alt="Imagen 3" />
+                </div>
+            </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </div>
+    <!-- Scripts Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
