@@ -1,9 +1,14 @@
+using gymwebproject.Repositorio;
+
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IRepoUsuario, RepoUsuario>();
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -22,6 +27,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=usuario}/{action=usuario}/{id?}");
+    pattern: "{controller=Home}/{action=menu}/{id?}");
 
 app.Run();

@@ -1,4 +1,7 @@
-﻿@{
+﻿@model RegistrarseModel
+
+
+@{
     ViewData["Title"] = "Registro";
 }
 <!DOCTYPE html>
@@ -59,24 +62,27 @@
             <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded"></div>
             <div class="col dark-form p-5 rounded-end">
                 <h2 class="fw-bold text-center py-4">Crear cuenta</h2>
-                <form action="">
+                <form asp-action="registro" asp-controller="Login" method="post">
                     <div class="mb-3">
-                        <label for="fullname" class="form-label">Nombre completo</label>
-                        <input type="text" class="form-control" name="fullname" placeholder="Tu nombre completo" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="email" class="form-control" name="email" placeholder="ejemplo@correo.com" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control" name="password" placeholder="••••••••" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="confirmPassword" class="form-label">Confirmar contraseña</label>
-                        <input type="password" class="form-control" name="confirmPassword" placeholder="Repite tu contraseña" />
+                        <label asp-for="nombre" class="form-label">Nombre completo</label>
+                        <input asp-for="nombre" type="text" class="form-control" placeholder="Tu nombre completo" />
+                        <span asp-validation-for="nombre" class="text-danger"></span>
                     </div>
 
+                    <div class="mb-3">
+                        <label asp-for="correo" class="form-label">Correo electrónico</label>
+                        <input asp-for="correo" type="email" class="form-control" placeholder="ejemplo@correo.com" />
+                        <span asp-validation-for="correo" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="contraseña" class="form-label">Contraseña</label>
+                        <input asp-for="contraseña" type="password" class="form-control" placeholder="••••••••" />
+                        <span asp-validation-for="contraseña" class="text-danger"></span>
+                    </div>
+
+                  
+                
                     <div class="mb-3 form-check">
                         <input type="checkbox" name="terms" class="form-check-input" />
                         <label class="form-check-label">Acepto los <a href="#">términos y condiciones</a></label>
@@ -84,6 +90,7 @@
 
                     <div class="d-grid mb-3">
                         <button type="submit" class="btn btn-custom">Registrarse</button>
+                       
                     </div>
 
                     <div class="text-center">

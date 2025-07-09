@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using gymwebproject.Models;
+using gymwebproject.Repositorio;
+using gymwebproject.Repositorio.Encrypt;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace gymwebproject.Controllers
@@ -6,10 +9,34 @@ namespace gymwebproject.Controllers
     public class LoginController : Controller
     {
         // GET: LoginController1
-        public ActionResult registro()
-        {
-            return View();
+        private readonly IRepoUsuario repoUsuario;
+        public LoginController(IRepoUsuario repoUsuario)
+        {   
+            this.repoUsuario = repoUsuario;
         }
+       
+            public IActionResult registro(RegistrarseModel usuario)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("~/Views/Login/registro.cshtml", usuario);
+            }
+            Encriptar encriptar = new Encriptar();
+            usuario.contraseña = encriptar.Encrypt(usuario.contraseña);
+
+                repoUsuario.RegistroUsuario(usuario);
+
+
+
+
+            return View("~/Views/Home/menu2.cshtml");
+
+
+            }
+    
+
+           
+        
 
         // GET: LoginController1/Details/5
         public ActionResult Details(int id)
