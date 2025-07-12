@@ -33,7 +33,38 @@ namespace gymwebproject.Controllers
 
 
             }
-    
+        public IActionResult Index(login GuardarL)
+        {
+            return View(GuardarL);
+        }
+
+        public async Task<IActionResult> Iniciar(login informacion)
+        {
+            ErrorViewModel errormodel = new ErrorViewModel();
+
+            try
+            {
+                Encriptar clave = new Encriptar();
+                informacion.contraseña = clave.Encrypt(informacion.contraseña);
+                bool rsp = await repoUsuario.ValidarUsuario(informacion);
+                if
+                    (rsp)
+                {
+                    return View("~/Views/Home/menu2.cshtml");
+
+                }
+
+                return View("~/Views/Home/Index.cshtml");
+
+            }
+            catch (Exception error) {
+
+                errormodel.RequestId = error.HResult.ToString();
+                errormodel.message = error.HResult.ToString();
+            }
+            return View("Error", errormodel);
+
+        }
 
            
         

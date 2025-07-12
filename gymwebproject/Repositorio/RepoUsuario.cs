@@ -10,11 +10,11 @@ namespace gymwebproject.Repositorio
     {
         Task<bool> RegistroUsuario(RegistrarseModel usuario);
 
+        Task<bool> ValidarUsuario(login usuario);
+
 
 
     }
-
-
 
     public class RepoUsuario : IRepoUsuario
     {
@@ -43,6 +43,14 @@ namespace gymwebproject.Repositorio
 
 
 
+        }
+
+        public async Task<bool> ValidarUsuario(login informacion)
+        {
+            using var connection = new SqlConnection(cnx);
+            string query = @"SELECT COUNT(1) FROM Registro WHERE  correo = @correo AND contraseña = @contraseña";
+            bool usuarioExitente = await connection.ExecuteScalarAsync<int>(query, new { informacion.correo, informacion.contraseña }) > 0;
+            return usuarioExitente;
         }
 
     }

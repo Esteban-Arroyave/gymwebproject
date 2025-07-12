@@ -1,4 +1,6 @@
-﻿@{
+﻿@model login
+
+@{
     ViewData["Title"] = "Home Page";
 }
 <!DOCTYPE html>
@@ -49,17 +51,16 @@
             <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded"></div>
             <div class="col dark-form p-5 rounded-end">
                 <h2 class="fw-bold text-center py-5">Bienvenido</h2>
-                <form action="">
+                <form asp-action="Iniciar" asp-controller="Login">
                     <div class="mb-4">
-                        <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="email" class="form-control" name="email" placeholder="ejemplo@correo.com" />
+                        <label for="correo" class="form-label">Correo electrónico</label>
+                        <input asp-for="correo" type="correo" class="form-control" name="correo" placeholder="ejemplo@correo.com" />
                     </div>
                     <div class="mb-4">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" placeholder="••••••••" />
+                        <label for="contraseña" class="form-label">Password</label>
+                        <input asp-for="contraseña" type="contraseña" class="form-control" name="contraseña" placeholder="••••••••" />
                     </div>
                     <div class="mb-4 form-check">
-                        <input type="checkbox" name="connected" class="form-check-input" value="" />
                         <label for="connected" class="form-check-label">Mantenerme conectado</label>
                     </div>
                     <div class="d-grid">

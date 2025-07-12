@@ -22,11 +22,11 @@ namespace gymwebproject.Controllers
         {
             return View();
         }
-
-        public IActionResult Index()
+        public IActionResult Index(login GuardarL)
         {
-            return View();
+            return View(GuardarL);
         }
+
 
         public IActionResult contacto()
         {
