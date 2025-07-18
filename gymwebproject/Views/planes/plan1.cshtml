@@ -88,11 +88,11 @@
                 <p class="fs-3">Suscripcion Bronce</p>
                 <hr style="height: 3px; background-color: black; border: none; width: 100%;">
                 <div>negros de mierda</div>
-
-                <button style="background-color: brown; color: white; padding: 10px 20px; border: none; border-radius: 5px;">
-                    Comprar
-                </button>
-
+                <form asp-action="registro" asp-controller="Login">
+                    <button style="background-color: brown; color: white; padding: 10px 20px; border: none; border-radius: 5px;">
+                        Comprar
+                    </button>
+                </form>
 
             </div>
 
@@ -105,9 +105,11 @@
                 <hr style="height: 3px; background-color: black; border: none; width: 100%;">
 
                 <div> holaaaaa  </div>
-
-                <button type="button" class="btn btn-secondary " style="padding: 10px 20px; border: none; border-radius: 5px;">Comprar</button>
-
+                <form asp-action="registro" asp-controller="Login">
+                    <button style="background-color: grey; color: white; padding: 10px 20px; border: none; border-radius: 5px;">
+                        Comprar
+                    </button>
+                </form>
             </div>
 
             <div class="col-1">
@@ -116,8 +118,12 @@
             <div class="col border border-dark">
                 <p class="fs-3">Suscripcion Oro</p>
                 <hr style="height: 3px; background-color: black; border: none; width: 100%;">
-                <button type="button" class="btn btn-warning" style="padding: 10px 20px; border: none; border-radius: 5px;">Comprar</button>
 
+                <form asp-action="registro" asp-controller="Login">
+                    <button style="background-color: yellow; color: white; padding: 10px 20px; border: none; border-radius: 5px;">
+                        Comprar
+                    </button>
+                </form>
             </div>
         </div>
     </div>

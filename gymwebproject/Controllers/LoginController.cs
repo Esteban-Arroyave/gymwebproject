@@ -13,9 +13,17 @@ namespace gymwebproject.Controllers
         public LoginController(IRepoUsuario repoUsuario)
         {   
             this.repoUsuario = repoUsuario;
+
+            
+
         }
-       
-            public IActionResult registro(RegistrarseModel usuario)
+
+
+
+        public IActionResult registro(RegistrarseModel usuario)
+        
+        
+        
         {
             if (!ModelState.IsValid)
             {
@@ -23,7 +31,7 @@ namespace gymwebproject.Controllers
             }
             Encriptar encriptar = new Encriptar();
             usuario.contraseña = encriptar.Encrypt(usuario.contraseña);
-
+            TempData["successMessage"] = "El registro fue exitoso";
                 repoUsuario.RegistroUsuario(usuario);
 
 
@@ -46,28 +54,34 @@ namespace gymwebproject.Controllers
             {
                 Encriptar clave = new Encriptar();
                 informacion.contraseña = clave.Encrypt(informacion.contraseña);
-                bool rsp = await repoUsuario.ValidarUsuario(informacion);
-                if
-                    (rsp)
-                {
-                    return View("~/Views/Home/menu2.cshtml");
 
+                bool rsp = await repoUsuario.ValidarUsuario(informacion);
+
+                if (rsp)
+                {
+                    // 🚨 Recuperar los datos completos del usuario:
+                    var usuario = await repoUsuario.ObtenerUsuarioPorCorreo(informacion.correo);
+
+                    // 🚨 Guardar el rol en sesión:
+                    HttpContext.Session.SetString("RolUsuario", usuario.rol);
+
+                    return View("~/Views/Home/menu2.cshtml");
                 }
 
                 return View("~/Views/Home/Index.cshtml");
-
             }
-            catch (Exception error) {
-
+            catch (Exception error)
+            {
                 errormodel.RequestId = error.HResult.ToString();
                 errormodel.message = error.HResult.ToString();
             }
-            return View("Error", errormodel);
 
+            return View("Error", errormodel);
         }
 
-           
-        
+
+
+
 
         // GET: LoginController1/Details/5
         public ActionResult Details(int id)

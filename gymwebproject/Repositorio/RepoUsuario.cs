@@ -12,6 +12,7 @@ namespace gymwebproject.Repositorio
 
         Task<bool> ValidarUsuario(login usuario);
 
+        Task<RegistrarseModel> ObtenerUsuarioPorCorreo(string correo);
 
 
     }
@@ -25,6 +26,16 @@ namespace gymwebproject.Repositorio
 
         }
 
+        public async Task<RegistrarseModel> ObtenerUsuarioPorCorreo(string correo)
+        {
+            using var connection = new SqlConnection(cnx);
+
+            string query = @"SELECT * FROM registro WHERE correo = @correo";
+
+            return await connection.QueryFirstOrDefaultAsync<RegistrarseModel>(query, new { correo });
+        }
+
+
         public async Task<bool> RegistroUsuario(RegistrarseModel usuario)
         {
             bool IsInserted = false;
@@ -32,8 +43,8 @@ namespace gymwebproject.Repositorio
             {
                 var connection = new SqlConnection(cnx);
                 IsInserted = await connection.ExecuteAsync(
-                    @"INSERT INTO registro (nombre,correo,contraseña)
-                        VALUES (@nombre,@correo,@contraseña)", usuario) > 0;
+                    @"INSERT INTO registro (nombre, apellido,correo,contraseña,Tiposexo, rol)
+                        VALUES (@nombre, @apellido,@correo,@contraseña, @Tiposexo, @rol)", usuario) > 0;
             
                     
 

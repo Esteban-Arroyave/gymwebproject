@@ -27,6 +27,18 @@ namespace gymwebproject.Controllers
             return View(GuardarL);
         }
 
+        public IActionResult gestion()
+        {
+            var rol = HttpContext.Session.GetString("RolUsuario");
+
+            if (rol != "Administrador")
+            {
+                return Content("Acceso denegado: No tienes permisos para ver esta página.");
+            }
+
+            return View();
+        }
+
 
         public IActionResult contacto()
         {
