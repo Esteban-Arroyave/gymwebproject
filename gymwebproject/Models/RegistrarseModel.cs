@@ -10,7 +10,12 @@
 
         public Tiposexo Tiposexo { get; set; }
 
+        public tipocc tipocc { get; set; }
+
+        public string cedula { get; set; }
         public string apellido { get; set; }
+
+        public string telefono { get; set; }
 
         public string rol { get; set; }
 

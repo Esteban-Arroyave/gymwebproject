@@ -18,12 +18,24 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-      
-    </footer>
+   
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+
+    <!-- PIE DE PÁGINA -->
+    <footer class="bg-dark text-light text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-2">&copy; 2025 GYMSTYLO. Proyecto académico.</p>
+            <p class="small">Sitio web de ejemplo desarrollado como entrega final.</p>
+
+            <form asp-action="Contacto" asp-controller="Home" method="get" class="d-inline">
+                <button type="submit" class="btn btn-outline-light btn-sm mt-2">Contáctanos</button>
+            </form>
+        </div>
+    </footer>
+
 </body>
 </html>
