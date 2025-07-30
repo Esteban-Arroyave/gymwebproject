@@ -1,4 +1,4 @@
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using gymwebproject.Models;
 using gymwebproject.Repositorio;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +37,8 @@ namespace gymwebproject.Controllers
 
             if (rol != "Administrador")
             {
-                return Content("Acceso denegado: No tienes permisos para ver esta p�gina.");
+                return Content("<script>alert('🚫 Acceso denegado: Solo administradores pueden ver esta página.'); window.location.href = '/Home/menu2';</script>", "text/html");
+
             }
 
             repogestion.gestion(gestion);

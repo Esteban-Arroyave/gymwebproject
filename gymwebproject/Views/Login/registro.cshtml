@@ -9,6 +9,7 @@
 }
 @{
     ViewData["Title"] = "Registro";
+    Layout = null;
 }
 <!DOCTYPE html>
 <html>
@@ -68,7 +69,7 @@
             <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded"></div>
             <div class="col dark-form p-5 rounded-end">
                 <h2 class="fw-bold text-center py-4">Crear cuenta</h2>
-                <form asp-action="registro" asp-controller="Login" method="post">
+                <form asp-action="registrarse" asp-controller="Login" method="post">
                     <div class="mb-3">
                         <label asp-for="nombre" class="form-label">Nombre</label>
                         <input asp-for="nombre" type="text" class="form-control" placeholder="Nombres" />
@@ -79,6 +80,21 @@
                         <label asp-for="apellido" class="form-label">Apellidos</label>
                         <input asp-for="apellido" type="text" class="form-control" placeholder="Apellidos" />
                         <span asp-validation-for="apellido" class="text-danger"></span>
+                    </div>
+
+                
+
+                    <div class="mb-3">
+                        <label asp-for="tipocc" class="form-label">Tipo de Cédula</label>
+                        <select asp-for="tipocc" class="form-control" asp-items="Html.GetEnumSelectList<tipocc>()"></select>
+                        <span asp-validation-for="Tiposexo" class="text-danger"></span>
+                    </div>
+
+                    
+                    <div class="mb-3">
+                        <label asp-for="cedula" class="form-label">Número de cédula</label>
+                        <input asp-for="cedula" type="number" class="form-control" placeholder="1234567" />
+                        <span asp-validation-for="correo" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
@@ -97,6 +113,12 @@
                         <label asp-for="contraseña" class="form-label">Contraseña</label>
                         <input asp-for="contraseña" type="password" class="form-control" placeholder="••••••••" />
                         <span asp-validation-for="contraseña" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="telefono" class="form-label">Telefono</label>
+                        <input asp-for="telefono" type="number" class="form-control" placeholder="1234567" />
+                        <span asp-validation-for="telefono" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">

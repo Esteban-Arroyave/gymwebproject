@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    Layout = null;
+
 }
 <!DOCTYPE html>
 <html>
@@ -58,7 +60,7 @@
                     </div>
                     <div class="mb-4">
                         <label for="contraseña" class="form-label">Password</label>
-                        <input asp-for="contraseña" type="contraseña" class="form-control" name="contraseña" placeholder="••••••••" />
+                        <input asp-for="contraseña" type="password" class="form-control" name="contraseña" placeholder="••••••••" />
                     </div>
                     <div class="mb-4 form-check">
                         <label for="connected" class="form-check-label">Mantenerme conectado</label>

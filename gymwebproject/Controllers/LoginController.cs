@@ -19,8 +19,13 @@ namespace gymwebproject.Controllers
         }
 
 
+        public IActionResult registro(RegistrarseModel usuario) 
+        { 
+            return View("~/Views/Login/registro.cshtml");
+        
+        }
 
-        public IActionResult registro(RegistrarseModel usuario)
+        public IActionResult registrarse(RegistrarseModel usuario)
         
         
         
