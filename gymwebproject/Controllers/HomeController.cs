@@ -1,16 +1,20 @@
 using System.Diagnostics;
 using gymwebproject.Models;
+using gymwebproject.Repositorio;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace gymwebproject.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IRepogestion repogestion;
+        private readonly IRepogestion _repo;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IRepogestion repogestion, IRepogestion repo)
         {
-            _logger = logger;
+            this.repogestion = repogestion;
+            _repo = repo;
         }
 
         public IActionResult menu()
@@ -27,7 +31,7 @@ namespace gymwebproject.Controllers
             return View(GuardarL);
         }
 
-        public IActionResult gestion()
+        public IActionResult gestion(gestionmodel gestion)
         {
             var rol = HttpContext.Session.GetString("RolUsuario");
 
@@ -36,7 +40,11 @@ namespace gymwebproject.Controllers
                 return Content("Acceso denegado: No tienes permisos para ver esta página.");
             }
 
-            return View();
+            repogestion.gestion(gestion);
+
+            return View(gestion);
+
+
         }
 
 
@@ -55,5 +63,34 @@ namespace gymwebproject.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+     
+
+        [HttpPost]
+        public async Task<IActionResult> ActualizarPrecios(gestionmodel  precio)
+        {
+            try
+            {
+
+
+                
+
+                bool rsp = await _repo.ActualizarPrecios(precio);
+
+          
+            }
+            catch (Exception)
+            {
+                
+            }
+
+            
+            return View("~/Views/Home/gestion.cshtml");
+        }
     }
+
+
+
+
 }
+

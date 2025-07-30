@@ -1,88 +1,56 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using gymwebproject.Repositorio.Data;
+using Microsoft.EntityFrameworkCore;
+using gymwebproject.Models;
+using static System.Collections.Specialized.BitVector32;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
 
 namespace gymwebproject.Controllers
 {
     public class planesController : Controller
     {
-        // GET: planesController
-        public ActionResult plan1()
+        private readonly ApplicationDbContext _context;
+
+        public planesController(ApplicationDbContext context)
         {
-            return View();
+            _context = context;
         }
 
-        public ActionResult plan2()
-        {
-            return View();
-        }
 
-        // GET: planesController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: planesController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
 
-        // POST: planesController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+
+
+
+
+        public ActionResult plan2(string tipo)
         {
-            try
+            var precios = _context.suscripciones.FirstOrDefault();
+            if (precios == null)
+                return View(new gestionmodel()); 
+
+            var model = new gestionmodel
             {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+                oro = precios.oro,
+                plata = precios.plata,
+                bronce = precios.bronce
+            };
+
+            return View(model);
+
         }
 
-        // GET: planesController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+        public ActionResult menu() { return View("~/Views/Home/menu.cshtml"); }
 
-        // POST: planesController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: planesController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: planesController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+
     }
+
+    
+
+
+
 }

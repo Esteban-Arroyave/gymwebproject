@@ -1,1 +1,81 @@
-﻿esta es la vista de gestion para la prueba de roles XDD
+﻿
+@model gestionmodel
+ 
+
+
+
+@{
+    
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">✨ Gestión de Precios de Suscripciones ✨</h2>
+
+
+    <form asp-action="ActualizarPrecios" asp-controller="Home" method="post">
+        <div class="row g-4">
+
+           
+            <div class="col-md-4">
+                <div class="card border-warning shadow">
+                    <div class="card-header bg-warning text-white text-center fw-bold">
+                        Plan Oro 🏆
+                    </div>
+                    <div class="card-body">
+                        <label asp-for="oro"  class="form-label">Precio ($)</label>
+                        <input asp-for="oro"  step="0.01" class="form-control" name="oro" value="" required />
+                        
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="col-md-4">
+                <div class="card border-secondary shadow">
+                    <div class="card-header bg-secondary text-white text-center fw-bold">
+                        Plan Plata 🥈
+                    </div>
+                    <div class="card-body">
+                        <label asp-for="plata"  class="form-label">Precio ($)</label>
+                        <input asp-for="plata"  step="0.01"  class="form-control" name="plata" value="" required />
+                        
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="col-md-4">
+                <div class="card border-warning-subtle shadow">
+                    <div class="card-header bg-bronze text-white text-center fw-bold" style="background-color: #cd7f32;">
+                        Plan Bronce 🥉
+                    </div>
+                    <div class="card-body">
+                        <label asp-for="bronce"  class="form-label">Precio ($)</label>
+                        <input asp-for="bronce"  step="0.01" name="bronce"  class="form-control" value="" required />
+                      
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary">Actualizar</button>
+          
+        </div>
+
+      
+
+        </form>
+
+   
+
+        
+   
+
+</div>
+
+
+

@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Compra de Suscripción";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Comprar Suscripción</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background: linear-gradient(135deg, #74ebd5, #ACB6E5); min-height: 100vh;">
+
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="card shadow-lg p-4" style="width: 100%; max-width: 550px; border-radius: 20px;">
+            <div class="card-body">
+                <h3 class="card-title text-center text-primary mb-4">Formulario de Compra</h3>
+
+                <form method="post" action="/Compra/ConfirmarCompra">
+                   
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre completo</label>
+                        <input type="text" class="form-control" id="nombre" name="NombreCompleto" required>
+                    </div>
+
+                    <!-- Correo -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Correo electrónico</label>
+                        <input type="email" class="form-control" id="email" name="Email" required>
+                    </div>
+
+                    <!-- Suscripción -->
+                    <div class="mb-3">
+                        <label for="suscripcion" class="form-label">Tipo de suscripción</label>
+                       
+                    </div>
+
+
+                    <div class="mb-3">
+
+
+                       <input type="" asp name="name" value="" />
+
+
+                    </div>
+
+
+                    <!-- Método de pago -->
+                    <div class="mb-3">
+                        <label for="pago" class="form-label">Método de pago</label>
+                        <select class="form-select" id="pago" name="MetodoPago" required onchange="mostrarCamposPago()">
+                            <option disabled selected value="">Seleccione un método</option>
+                            <option value="Tarjeta">Tarjeta de crédito/débito</option>
+                            <option value="Nequi">Nequi</option>
+                            <option value="Daviplata">Daviplata</option>
+                            <option value="PSE">PSE</option>
+                        </select>
+                    </div>
+
+                    <!-- Campo para número de teléfono (Nequi/Daviplata) -->
+                    <div id="campoTelefono" class="mb-3 d-none">
+                        <label for="telefono" class="form-label">Número de teléfono</label>
+                        <input type="tel" class="form-control" id="telefono" name="Telefono" placeholder="Ej: 3001234567">
+                    </div>
+
+                    <!-- Campo para tarjeta (si elige Tarjeta) -->
+                    <div id="campoTarjeta" class="mb-3 d-none">
+                        <label for="tarjeta" class="form-label">Número de tarjeta</label>
+                        <input type="text" class="form-control" id="tarjeta" name="NumeroTarjeta" placeholder="XXXX XXXX XXXX XXXX">
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg">Confirmar Compra</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function mostrarCamposPago() {
+            const metodo = document.getElementById("pago").value;
+            const campoTelefono = document.getElementById("campoTelefono");
+            const campoTarjeta = document.getElementById("campoTarjeta");
+
+            // Mostrar u ocultar según la selección
+            campoTelefono.classList.add("d-none");
+            campoTarjeta.classList.add("d-none");
+
+            if (metodo === "Nequi" || metodo === "Daviplata") {
+                campoTelefono.classList.remove("d-none");
+            } else if (metodo === "Tarjeta") {
+                campoTarjeta.classList.remove("d-none");
+            }
+        }
+    </script>
+
+</body>
+</html>

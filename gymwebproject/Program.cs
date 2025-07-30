@@ -1,11 +1,17 @@
 using gymwebproject.Repositorio;
+using gymwebproject.Repositorio.Data;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddTransient<IRepogestion, Repogestion>();
 builder.Services.AddTransient<IRepoUsuario, RepoUsuario>();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddSession();
 
 
@@ -32,6 +38,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=menu}/{id?}");
+    pattern: "{controller=planes}/{action=plan2}/{id?}");
 
 app.Run();
