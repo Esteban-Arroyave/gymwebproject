@@ -9,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IRepogestion, Repogestion>();
 builder.Services.AddTransient<IRepoUsuario, RepoUsuario>();
+builder.Services.AddTransient<IRepopasarela, Repopasarela>();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 

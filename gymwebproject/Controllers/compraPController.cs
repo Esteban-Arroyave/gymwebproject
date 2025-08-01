@@ -1,18 +1,36 @@
 ﻿using gymwebproject.Models;
+using gymwebproject.Repositorio;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace gymwebproject.Controllers
 {
     public class compraPController : Controller
 
     {
+        private readonly IRepopasarela repopasarela;
+
+        public compraPController(IRepopasarela repopasarela)
+         {
 
 
-    
-        public IActionResult ComprarP()
+            this.repopasarela = repopasarela;
+
+
+        }
+
+        public IActionResult CompraP( string plan, decimal precio )
         {
-             return View();
+
+              
+            
+
+            ViewBag.PlanSeleccionado = plan;
+            ViewBag.PrecioSeleccionado = precio;
+           
+
+            return View("~/Views/planes/compraP.cshtml");
         }
 
 
