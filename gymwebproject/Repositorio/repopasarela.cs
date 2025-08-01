@@ -5,47 +5,43 @@ using System.Data.SqlClient;
 namespace gymwebproject.Repositorio
 {
 
-   public interface IRepopasarela
+  public interface IRepopasarela
+{
+    Task<bool> compraP(compraPmodel pasarela);
+}
+
+public class Repopasarela : IRepopasarela
+{
+    private readonly string cnx;
+
+    public Repopasarela(IConfiguration configuration)
     {
-
-        Task<bool>compraP(compraPmodel pasarela);
-
-
+        cnx = configuration.GetConnectionString("DefaultConnection");
     }
 
-
-    public class repopasarela : IRepopasarela
-    {
-
-
-        private readonly string cnx;
-        public repopasarela(IConfiguration configuration)
+        public async Task<bool> compraP(compraPmodel pasarela)
         {
-            cnx = configuration.GetConnectionString("DefaultConnection");
-
-        }
-
-
-
-        public async Task<bool> RegistroUsuario(RegistrarseModel usuario)
-        {
-            bool IsInserted = false;
+            bool IsSuccess = false;
             try
             {
-                var connection = new SqlConnection(cnx);
-                IsInserted = await connection.ExecuteAsync(
-                    @"INSERT INTO registro (nombre, apellido,correo,contraseña,Tiposexo, rol, tipocc, cedula, telefono)
-                        VALUES (@nombre, @apellido,@correo,@contraseña, @Tiposexo, @rol,  @tipocc, @cedula, @telefono)", usuario) > 0;
-
-
-
+                using (var connection = new SqlConnection(cnx))
+                {
+                    IsSuccess = await connection.ExecuteAsync(
+                        @"INSERT INTO registroC (nombre, correo, suscripcion, precio, Metodo, numero, tarjeta)
+                      VALUES (@nombre, @correo, @suscripcion, @precio, @Metodo, @numero, @tarjeta)",
+                        pasarela) > 0;
+                }
             }
-            catch (Exception ex) { }
-            return IsInserted;
+            catch (Exception ex)
+            {
+                
+            }
 
-
-
+            return IsSuccess;
         }
+
+      
+}
 
 
 
@@ -73,4 +69,3 @@ namespace gymwebproject.Repositorio
 
 
 
-}

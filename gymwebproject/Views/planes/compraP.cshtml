@@ -23,7 +23,7 @@
             <div class="card-body">
                 <h3 class="card-title text-center text-primary mb-4">Formulario de Compra</h3>
 
-                <form method="post" action="/Compra/ConfirmarCompra">
+                <form asp-action="compraP" asp-controller="compraP"    method="post">
                     <!-- Nombre -->
                     <div class="mb-3">
                         <label for="nombre" asp-for="nombre" class="form-label">Nombre completo</label>
@@ -33,13 +33,13 @@
                     <!-- Correo -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="email" asp-for="correo" class="form-control" id="email" name="Email" required>
+                        <input type="email" asp-for="correo" class="form-control" id="email"  required>
                     </div>
 
                     <!-- Suscripción -->
                     <div class="mb-3">
                         <label class="form-label">Tipo de suscripción</label>
-                        <input type="text" asp-for="suscripcion" class="form-control" name="TipoSuscripcion" value="@plan" readonly />
+                        <input type="text" asp-for="suscripcion" class="form-control" value="@plan" readonly />
                     </div>
 
                     <!-- Precio -->
@@ -52,7 +52,7 @@
                     <!-- Método de pago -->
                     <div class="mb-3">
                         <label for="pago" class="form-label">Método de pago</label>
-                        <select class="form-select" asp-for="metodo" id="pago" name="MetodoPago" required onchange="mostrarCamposPago()">
+                        <select class="form-select" asp-for="metodo" id="pago"  required onchange="mostrarCamposPago()">
                             <option disabled selected value="">Seleccione un método</option>
                             <option value="Tarjeta">Tarjeta de crédito/débito</option>
                             <option value="Nequi">Nequi</option>
@@ -64,13 +64,13 @@
                     <!-- Teléfono (para Nequi/Daviplata) -->
                     <div id="campoTelefono" class="mb-3 d-none">
                         <label for="telefono" class="form-label">Número de teléfono</label>
-                        <input type="tel" asp-for="numero" class="form-control" id="telefono" name="Telefono" placeholder="Ej: 3001234567">
+                        <input type="tel" asp-for="numero" class="form-control" id="telefono"  placeholder="Ej: 3001234567">
                     </div>
 
                     <!-- Tarjeta -->
                     <div id="campoTarjeta" class="mb-3 d-none">
                         <label for="tarjeta" class="form-label">Número de tarjeta</label>
-                        <input type="text" asp-for="tarjeta" class="form-control" id="tarjeta" name="NumeroTarjeta" placeholder="XXXX XXXX XXXX XXXX">
+                        <input type="text" asp-for="tarjeta" class="form-control" id="tarjeta"  placeholder="XXXX XXXX XXXX XXXX">
                     </div>
 
                     <div class="d-grid">

@@ -20,18 +20,23 @@ namespace gymwebproject.Controllers
 
         }
 
-        public IActionResult CompraP( string plan, decimal precio )
+        public async Task<IActionResult> CompraP(compraPmodel pasarela, string plan, decimal precio)
         {
-
-              
-            
-
             ViewBag.PlanSeleccionado = plan;
             ViewBag.PrecioSeleccionado = precio;
-           
 
-            return View("~/Views/planes/compraP.cshtml");
+            
+            bool guardado = await repopasarela.compraP(pasarela);
+
+            if (guardado)
+            {
+                return View("~/Views/planes/compraP.cshtml");
+            }
+
+            ViewBag.Error = "No se pudo guardar la compra.";
+            return View("~/Views/planes/compraP.cshtml", pasarela);
         }
+
 
 
         // GET: compraCController/Details/5
