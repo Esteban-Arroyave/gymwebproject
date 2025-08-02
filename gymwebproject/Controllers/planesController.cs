@@ -19,7 +19,21 @@ namespace gymwebproject.Controllers
         }
 
 
+        public ActionResult plan1()
+        {
 
+            var precios = _context.suscripciones.FirstOrDefault();
+            if (precios == null)
+                return View(new gestionmodel());
+
+            var model = new gestionmodel
+            {
+                oro = precios.oro,
+                plata = precios.plata,
+                bronce = precios.bronce
+            };
+            return View(model);
+        }
 
 
 
@@ -45,34 +59,11 @@ namespace gymwebproject.Controllers
         public ActionResult menu() { return View("~/Views/Home/menu.cshtml"); }
 
 
-        public ActionResult plan1(string tipo) {
-
-
-
-
-            var precios = _context.suscripciones.FirstOrDefault();
-            if (precios == null)
-                return View(new gestionmodel());
-
-            var model = new gestionmodel
-            {
-                oro = precios.oro,
-                plata = precios.plata,
-                bronce = precios.bronce
-            };
-
-            return View(model);
-
-
-        }
-
-
-
-
 
 
     }
 
+    
 
 
 

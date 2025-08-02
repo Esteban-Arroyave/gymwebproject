@@ -7,10 +7,22 @@
         @TempData["SuccessMessage"]
     </div>
 }
+
+
 @{
     ViewData["Title"] = "Registro";
     Layout = null;
 }
+
+
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState.Count > 0)
+{
+    <div class="alert alert-danger">
+        Por favor completa todos los campos antes de continuar.
+    </div>
+}
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,21 +94,7 @@
                         <span asp-validation-for="apellido" class="text-danger"></span>
                     </div>
 
-                
-
-                    <div class="mb-3">
-                        <label asp-for="tipocc" class="form-label">Tipo de Cédula</label>
-                        <select asp-for="tipocc" class="form-control" asp-items="Html.GetEnumSelectList<tipocc>()"></select>
-                        <span asp-validation-for="Tiposexo" class="text-danger"></span>
-                    </div>
-
-                    
-                    <div class="mb-3">
-                        <label asp-for="cedula" class="form-label">Número de cédula</label>
-                        <input asp-for="cedula" type="number" class="form-control" placeholder="1234567" />
-                        <span asp-validation-for="correo" class="text-danger"></span>
-                    </div>
-
+               
                     <div class="mb-3">
                         <label asp-for="Tiposexo" class="form-label">Sexo</label>
                         <select asp-for="Tiposexo" class="form-control" asp-items="Html.GetEnumSelectList<Tiposexo>()"></select>
@@ -116,12 +114,6 @@
                     </div>
 
                     <div class="mb-3">
-                        <label asp-for="telefono" class="form-label">Telefono</label>
-                        <input asp-for="telefono" type="number" class="form-control" placeholder="1234567" />
-                        <span asp-validation-for="telefono" class="text-danger"></span>
-                    </div>
-
-                    <div class="mb-3">
                         <label class="form-label">Selecciona tu rol</label>
                         <select name="rol" class="form-control" required>
                             <option value="Cliente">Cliente</option>
@@ -137,14 +129,25 @@
 
 
                     <div class="d-grid mb-3">
-                        <button type="submit" class="btn btn-custom">Registrarse</button>
+                        <button mehod="post" type="submit" class="btn btn-custom" >Registrarse</button>
                        
                     </div>
 
+                    <p class="text-center">
+                        ¿Ya tienes cuenta?
+                        <a asp-controller="Home" asp-action="Index"
+                           style="color: #339CFF; text-decoration: underline;">
+                            Inicia sesión
+                        </a>
+                    </p>
+                    <p class="text-center">
+                        Volver al
+                        <a asp-controller="Home" asp-action="menu"
+                           style="color: #339CFF; text-decoration: underline;">
+                           inicio
+                        </a>
+                    </p>
 
-                    <div class="text-center">
-                        <span>¿Ya tienes cuenta? <a href="#">Inicia sesión</a></span>
-                    </div>
                 </form>
             </div>
         </div>
@@ -153,3 +156,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

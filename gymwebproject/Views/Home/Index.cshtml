@@ -69,8 +69,20 @@
                         <button type="submit" class="btn btn-primary">Iniciar sesión</button>
                     </div>
                     <div class="my-3">
-                        <span>¿No tienes cuenta? <a href="#">Regístrate</a></span><br />
-                        <span><a href="#">Recuperar Password</a></span>
+                        <p>
+                            ¿No tienes cuenta?
+                            <a asp-controller="Login" asp-action="registro"
+                               style="color: #339CFF; text-decoration: underline;">
+                                Regístrate
+                            </a>
+                        </p>
+                        <p class="my-3">
+                            Volver al
+                            <a asp-controller="Home" asp-action="menu"
+                               style="color: #339CFF; text-decoration: underline;">
+                                inicio
+                            </a>
+                        </p>
                     </div>
                 </form>
             </div>

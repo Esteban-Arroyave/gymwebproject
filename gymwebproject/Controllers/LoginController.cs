@@ -26,26 +26,22 @@ namespace gymwebproject.Controllers
         }
 
         public IActionResult registrarse(RegistrarseModel usuario)
-        
-        
-        
         {
             if (!ModelState.IsValid)
             {
+                // Muestra los errores en la vista registro.cshtml
                 return View("~/Views/Login/registro.cshtml", usuario);
             }
+
             Encriptar encriptar = new Encriptar();
             usuario.contraseña = encriptar.Encrypt(usuario.contraseña);
+
+            repoUsuario.RegistroUsuario(usuario);
+
             TempData["successMessage"] = "El registro fue exitoso";
-                repoUsuario.RegistroUsuario(usuario);
-
-
-
-
             return View("~/Views/Home/menu2.cshtml");
+        }
 
-
-            }
         public IActionResult Index(login GuardarL)
         {
             return View(GuardarL);
