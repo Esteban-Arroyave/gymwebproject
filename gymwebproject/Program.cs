@@ -40,6 +40,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=planes}/{action=plan2}/{id?}");
+    pattern: "{controller=planes}/{action=plan1}/{id?}");
 
 app.Run();
