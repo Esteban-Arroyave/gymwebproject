@@ -25,21 +25,56 @@ namespace gymwebproject.Controllers
         
         }
 
-        public IActionResult registrarse(RegistrarseModel usuario)
+        //public IActionResult registrarse(RegistrarseModel usuario)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        // Muestra los errores en la vista registro.cshtml
+        //        return View("~/Views/Login/registro.cshtml", usuario);
+        //    }
+
+        //    Encriptar encriptar = new Encriptar();
+        //    usuario.contraseña = encriptar.Encrypt(usuario.contraseña);
+
+        //    repoUsuario.RegistroUsuario(usuario);
+
+        //    TempData["successMessage"] = "El registro fue exitoso";
+        //    return View("~/Views/Home/menu2.cshtml");
+        //}
+
+        public async Task<IActionResult> Registrase(RegistrarseModel usuario)
         {
             if (!ModelState.IsValid)
             {
-                // Muestra los errores en la vista registro.cshtml
-                return View("~/Views/Login/registro.cshtml", usuario);
+                TempData["ErrorRegistro"] = "Datos inválidos, revisa el formulario.";
+                return RedirectToAction("Registrarse");
             }
 
-            Encriptar encriptar = new Encriptar();
-            usuario.contraseña = encriptar.Encrypt(usuario.contraseña);
+            try
+            {
+               
+                // Encriptar la contraseña antes de guardar
+                Encriptar encriptar = new Encriptar();
+                usuario.contraseña = encriptar.Encrypt(usuario.contraseña);
 
-            repoUsuario.RegistroUsuario(usuario);
+                bool creado = await repoUsuario.RegistroUsuario(usuario);
 
-            TempData["successMessage"] = "El registro fue exitoso";
-            return View("~/Views/Home/menu2.cshtml");
+                if (creado)
+                {
+                    TempData["MensajeExito"] = "Cuenta creada correctamente. Ahora puedes iniciar sesión.";
+                    return RedirectToAction("Logins", "Logins");
+                }
+                else
+                {
+                    TempData["ErrorRegistro"] = "No se pudo registrar el usuario (puede que el correo ya exista).";
+                    return RedirectToAction("Registrarse");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorRegistro"] = $"Ocurrió un error: {ex.Message}";
+                return RedirectToAction("Registrarse");
+            }
         }
 
         public IActionResult Index(login GuardarL)
