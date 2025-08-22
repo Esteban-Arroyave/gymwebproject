@@ -42,7 +42,7 @@ namespace gymwebproject.Controllers
         //    return View("~/Views/Home/menu2.cshtml");
         //}
 
-        public async Task<IActionResult> Registrase(RegistrarseModel usuario)
+        public async Task<IActionResult> registrarse(RegistrarseModel usuario)
         {
             if (!ModelState.IsValid)
             {
@@ -62,18 +62,18 @@ namespace gymwebproject.Controllers
                 if (creado)
                 {
                     TempData["MensajeExito"] = "Cuenta creada correctamente. Ahora puedes iniciar sesión.";
-                    return RedirectToAction("Logins", "Logins");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
                     TempData["ErrorRegistro"] = "No se pudo registrar el usuario (puede que el correo ya exista).";
-                    return RedirectToAction("Registrarse");
+                    return RedirectToAction("registrase");
                 }
             }
             catch (Exception ex)
             {
                 TempData["ErrorRegistro"] = $"Ocurrió un error: {ex.Message}";
-                return RedirectToAction("Registrarse");
+                return RedirectToAction("registrase");
             }
         }
 
