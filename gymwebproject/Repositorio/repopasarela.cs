@@ -1,23 +1,30 @@
 ﻿using Dapper;
 using gymwebproject.Models;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace gymwebproject.Repositorio
 {
 
-  public interface IRepopasarela
-{
-    Task<bool> compraP(compraPmodel pasarela);
-}
-
-public class Repopasarela : IRepopasarela
-{
-    private readonly string cnx;
-
-    public Repopasarela(IConfiguration configuration)
+    public interface IRepopasarela
     {
-        cnx = configuration.GetConnectionString("DefaultConnection");
+        Task<bool> compraP(compraPmodel pasarela);
+
+        IEnumerable<compraPmodel> ListarCompra();
+
+        compraPmodel BuscarPorId(int id);
+
+        Task<bool> Actualizar(compraPmodel pasarela);
     }
+
+    public class Repopasarela : IRepopasarela
+    {
+        private readonly string cnx;
+
+        public Repopasarela(IConfiguration configuration)
+        {
+            cnx = configuration.GetConnectionString("DefaultConnection");
+        }
 
         public async Task<bool> compraP(compraPmodel pasarela)
         {
@@ -27,27 +34,77 @@ public class Repopasarela : IRepopasarela
                 using (var connection = new SqlConnection(cnx))
                 {
                     IsSuccess = await connection.ExecuteAsync(
-                        @"INSERT INTO registroC (nombre, correo, suscripcion, precio, Metodo, numero, tarjeta)
-                      VALUES (@nombre, @correo, @suscripcion, @precio, @Metodo, @numero, @tarjeta)",
+                        @"INSERT INTO registroC (nombre, correo, suscripcion, precio, Metodo, numero, tarjeta, estado, FechaCompra)
+                      VALUES (@nombre, @correo, @suscripcion, @precio, @Metodo, @numero, @tarjeta, @estado, @FechaCompra)",
                         pasarela) > 0;
                 }
             }
             catch (Exception ex)
             {
-                
+
             }
 
             return IsSuccess;
         }
 
-      
-}
 
+        //enlistar compra
 
+        public IEnumerable<compraPmodel> ListarCompra()
+        {
+            using (IDbConnection db = new SqlConnection(cnx))
+            {
+                string sqlQuery = @"
+            SELECT * 
+            FROM registroC
+            WHERE nombre IS NOT NULL
+              AND correo IS NOT NULL
+              AND suscripcion IS NOT NULL
+              AND metodo IS NOT NULL
+              AND tarjeta IS NOT NULL
+              AND estado IS NOT NULL
+              AND FechaCompra IS NOT NULL";
+
+                return db.Query<compraPmodel>(sqlQuery).ToList();
+            }
+        }
+
+        public compraPmodel BuscarPorId(int id)
+        {
+            using (IDbConnection db = new SqlConnection(cnx))
+            {
+                string sql = "SELECT * FROM registroC WHERE id = @Id";
+                return db.QueryFirstOrDefault<compraPmodel>(sql, new { Id = id });
+            }
+        }
+
+        // 👇 NUEVO: actualizar datos de la compra
+        public async Task<bool> Actualizar(compraPmodel pasarela)
+        {
+            using (var connection = new SqlConnection(cnx))
+            {
+                string sql = @"
+                UPDATE registroC
+                SET nombre = @nombre,
+                    correo = @correo,
+                    suscripcion = @suscripcion,
+                    precio = @precio,
+                    Metodo = @Metodo,
+                    numero = @numero,
+                    tarjeta = @tarjeta,
+                    estado = @estado,
+                    FechaCompra = @FechaCompra
+                WHERE Id = @Id";
+
+                return await connection.ExecuteAsync(sql, pasarela) > 0;
+            }
+        }
 
 
 
     }
+
+}
 
 
 

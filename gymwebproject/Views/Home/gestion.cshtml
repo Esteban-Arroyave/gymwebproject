@@ -20,6 +20,7 @@
     function mostrarSeccion(seccion) {
         document.getElementById("precios").style.display = (seccion === "precios") ? "block" : "none";
         document.getElementById("datos").style.display = (seccion === "datos") ? "block" : "none";
+        document.getElementById("planes").style.display = (seccion === "planes") ? "block" : "none";
     }
 </script>
 
@@ -30,9 +31,18 @@
             <h5 class="mb-4 text-center">Menú</h5>
             <button class="btn btn-outline-light" onclick="mostrarSeccion('precios')">Precios</button>
             <button class="btn btn-outline-light" onclick="mostrarSeccion('datos')">Datos</button>
-                <form asp-action="menu2" asp-controller="Home" method="get" class="m-0 p-0">
+            <button class="btn btn-outline-light" onclick="mostrarSeccion('planes')">Planes de usuario</button>
+            <form asp-action="menu2" asp-controller="Home" method="get" class="m-0 p-0">
                 <button type="submit" class="btn btn-outline-light w-100">Inicio</button>
-                </form>
+            </form>
+
+
+           @*  planes usuario boton *@
+            <form asp-action="PlanesUsuario" asp-controller="Planes" method="get" class="m-0 p-0">
+                <button type="submit" class="btn btn-outline-light w-100">Planes de Usuario</button>
+            </form>
+
+
         </div>
 
         <!-- Contenido principal -->
@@ -41,10 +51,8 @@
             <!-- Sección PRECIOS -->
             <div id="precios">
                 <h2 class="text-center mb-4">✨ Gestión de Precios de Suscripciones ✨</h2>
-
                 <form asp-action="ActualizarPrecios" asp-controller="Home" method="post">
                     <div class="row g-4">
-
                         <!-- Oro -->
                         <div class="col-md-4">
                             <div class="card border-warning shadow">
@@ -57,7 +65,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- Plata -->
                         <div class="col-md-4">
                             <div class="card border-secondary shadow">
@@ -70,7 +77,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <!-- Bronce -->
                         <div class="col-md-4">
                             <div class="card shadow border-0">
@@ -83,9 +89,7 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
                     <div class="text-center mt-4">
                         <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
@@ -97,28 +101,30 @@
                 <h2 class="text-center mb-4">Gestión de Datos</h2>
                 <div class="card shadow p-4">
                     <h2>Listado de Usuarios</h2>
-                    <p>
-                        Haga click en el siguiente enlace para generar el documento
-                    </p>
-                    <a href="/Pdf/pdfInventario" target="_blank" class="btn btn-primary">Generar PDF</a>
+                    <p>Haga click en el siguiente enlace para generar el documento</p>
+                    <a href="/Pdf/pdfInventario" target="_blank" class="btn btn-primary">Generar PDF</a>
+                </div>
+                <div class="card shadow p-4">
+                    <h2>Listado de Suscripciones</h2>
+                    <p>Haga click en el siguiente enlace para generar el documento</p>
+                    <a href="/Pdf/pdfsuscripciones" target="_blank" class="btn btn-primary">Generar PDF</a>
+                </div>
+                <div class="card shadow p-4">
+                    <h2>Listado de Pagos</h2>
+                    <p>Haga click en el siguiente enlace para generar el documento</p>
+                    <a href="/Pdf/pdfregistroC" target="_blank" class="btn btn-primary">Generar PDF</a>
+                </div>
+            </div>
+
+            <!-- Sección PLANES -->
+            <div id="planes" style="display: none;">
+                <h2 class="text-center mb-4">📌 Planes de Usuario</h2>
+                <div class="card shadow p-4">
+                    <p>Aquí irá la gestión y listado de los planes adquiridos por los usuarios (enlazado con tus compras).</p>
+                </div>
 
 
             </div>
-
-                <div class="card shadow p-4">
-                    <h2>Listado de Suscripciones</h2>
-                    <p>
-                        Haga click en el siguiente enlace para generar el documento
-                    </p>
-                    <a href="/Pdf/pdfsuscripciones" target="_blank" class="btn btn-primary">Generar PDF</a>
-                   
         </div>
-                <div class="card shadow p-4">
-                    <h2>Listado de Pagos</h2>
-                    <p>
-                        Haga click en el siguiente enlace para generar el documento
-                    </p>
-                    <a href="/Pdf/pdfregistroC" target="_blank" class="btn btn-primary">Generar PDF</a>
-
-                </div>
+    </div>
 </div>

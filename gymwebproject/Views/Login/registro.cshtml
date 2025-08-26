@@ -113,12 +113,8 @@
                         <span asp-validation-for="contraseña" class="text-danger"></span>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Selecciona tu rol</label>
-                        <select name="rol" class="form-control" required>
-                            <option value="Cliente">Cliente</option>
-                            <option value="Administrador">Administrador</option>
-                        </select>
+                    <div class="mb-3" >
+                        <input type="hidden" name="rol" value="Cliente">
                     </div>
 
                 

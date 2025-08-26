@@ -25,7 +25,10 @@ namespace gymwebproject.Controllers
             ViewBag.PlanSeleccionado = plan;
             ViewBag.PrecioSeleccionado = precio;
 
-            
+            // 🔒 Asignar fecha de creación automáticamente
+            pasarela.FechaCompra = DateTime.Now;
+
+
             bool guardado = await repopasarela.compraP(pasarela);
 
             if (guardado)
