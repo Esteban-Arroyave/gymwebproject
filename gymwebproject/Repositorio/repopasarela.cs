@@ -14,7 +14,7 @@ namespace gymwebproject.Repositorio
 
         compraPmodel BuscarPorId(int id);
 
-        Task<bool> Actualizar(compraPmodel pasarela);
+        Task<bool> Actualizar(int id, string estado);
     }
 
     public class Repopasarela : IRepopasarela
@@ -79,26 +79,19 @@ namespace gymwebproject.Repositorio
         }
 
         // 👇 NUEVO: actualizar datos de la compra
-        public async Task<bool> Actualizar(compraPmodel pasarela)
-        {
-            using (var connection = new SqlConnection(cnx))
-            {
-                string sql = @"
-                UPDATE registroC
-                SET nombre = @nombre,
-                    correo = @correo,
-                    suscripcion = @suscripcion,
-                    precio = @precio,
-                    Metodo = @Metodo,
-                    numero = @numero,
-                    tarjeta = @tarjeta,
-                    estado = @estado,
-                    FechaCompra = @FechaCompra
-                WHERE Id = @Id";
+        public async Task<bool> Actualizar(int id, string estado)
+{
+    using (var connection = new SqlConnection(cnx))
+    {
+        string sql = @"
+        UPDATE registroC
+        SET estado = @estado
+        WHERE Id = @id";
 
-                return await connection.ExecuteAsync(sql, pasarela) > 0;
-            }
-        }
+        return await connection.ExecuteAsync(sql, new { id, estado }) > 0;
+    }
+}
+
 
 
 

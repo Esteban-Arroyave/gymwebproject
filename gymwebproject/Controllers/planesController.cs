@@ -145,21 +145,17 @@ namespace gymwebproject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Actualizar(compraPmodel model)
+        public async Task<IActionResult> ActualizarEstado(int id, string estado)
         {
-            if (!ModelState.IsValid)
-            {
-                return Json(new { success = false, message = "Datos inválidos" });
-            }
-
-            var actualizado = await repopasarela.Actualizar(model);
+            var actualizado = await repopasarela.Actualizar(id, estado);
 
             return Json(new
             {
                 success = actualizado,
-                estado = model.estado
+                estado
             });
         }
+
 
 
 
