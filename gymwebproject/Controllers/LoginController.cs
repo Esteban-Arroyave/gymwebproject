@@ -98,8 +98,9 @@ namespace gymwebproject.Controllers
                     // 🚨 Recuperar los datos completos del usuario:
                     var usuario = await repoUsuario.ObtenerUsuarioPorCorreo(informacion.correo);
 
-                    // 🚨 Guardar el rol en sesión:
+                    // 🚨 Guardar datos en sesión:
                     HttpContext.Session.SetString("RolUsuario", usuario.rol);
+                    HttpContext.Session.SetString("Correo", usuario.correo); // 🔑 se guarda el correo aquí
 
                     return View("~/Views/Home/menu2.cshtml");
                 }
@@ -109,11 +110,45 @@ namespace gymwebproject.Controllers
             catch (Exception error)
             {
                 errormodel.RequestId = error.HResult.ToString();
-                errormodel.message = error.HResult.ToString();
+                errormodel.message = error.Message;
             }
 
             return View("Error", errormodel);
         }
+
+
+        //public async Task<IActionResult> Iniciar(login informacion)
+        //{
+        //    ErrorViewModel errormodel = new ErrorViewModel();
+
+        //    try
+        //    {
+        //        Encriptar clave = new Encriptar();
+        //        informacion.contraseña = clave.Encrypt(informacion.contraseña);
+
+        //        bool rsp = await repoUsuario.ValidarUsuario(informacion);
+
+        //        if (rsp)
+        //        {
+        //            // 🚨 Recuperar los datos completos del usuario:
+        //            var usuario = await repoUsuario.ObtenerUsuarioPorCorreo(informacion.correo);
+
+        //            // 🚨 Guardar el rol en sesión:
+        //            HttpContext.Session.SetString("RolUsuario", usuario.rol);
+
+        //            return View("~/Views/Home/menu2.cshtml");
+        //        }
+
+        //        return View("~/Views/Home/Index.cshtml");
+        //    }
+        //    catch (Exception error)
+        //    {
+        //        errormodel.RequestId = error.HResult.ToString();
+        //        errormodel.message = error.HResult.ToString();
+        //    }
+
+        //    return View("Error", errormodel);
+        //}
 
 
 

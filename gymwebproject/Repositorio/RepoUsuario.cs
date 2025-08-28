@@ -14,6 +14,8 @@ namespace gymwebproject.Repositorio
 
         Task<RegistrarseModel> ObtenerUsuarioPorCorreo(string correo);
 
+        Task<List<compraPmodel>> ListarComprasPorCorreo(string correo);
+
 
     }
 
@@ -63,6 +65,58 @@ namespace gymwebproject.Repositorio
             bool usuarioExitente = await connection.ExecuteScalarAsync<int>(query, new { informacion.correo, informacion.contraseña }) > 0;
             return usuarioExitente;
         }
+
+        //nuevo
+        public async Task<List<compraPmodel>> ListarComprasPorCorreo(string correo)
+        {
+            var compras = new List<compraPmodel>();
+
+            using (var connection = new SqlConnection(cnx))
+            {
+                string sql = @"SELECT Id, nombre, correo, suscripcion, precio, metodo, numero, tarjeta, estado, FechaCompra 
+                       FROM registroC 
+                       WHERE correo = @correo";
+
+                using (var command = new SqlCommand(sql, connection))
+                {
+                    command.Parameters.AddWithValue("@correo", correo);
+
+                    await connection.OpenAsync();
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            compras.Add(new compraPmodel
+                            {
+                                Id = reader.GetInt32(0),
+                                nombre = reader.GetString(1),
+                                correo = reader.GetString(2),
+                                suscripcion = reader.GetString(3),
+
+                                // 👇 conversión segura para precio
+                                precio = decimal.TryParse(reader["precio"].ToString(), out var precioDecimal)
+                                         ? precioDecimal
+                                         : 0,
+
+                                metodo = reader.GetString(5),
+
+                                // 👇 si "numero" también es texto en tu BD (varchar), cambia esto a string
+                                numero = decimal.TryParse(reader["numero"].ToString(), out var numeroDecimal)
+                                         ? numeroDecimal
+                                         : 0,
+
+                                tarjeta = reader.GetString(7),
+                                estado = reader.GetString(8),
+                                FechaCompra = reader.GetDateTime(9)
+                            });
+                        }
+
+                    }
+                }
+            }
+            return compras;
+        }
+
 
     }
 }

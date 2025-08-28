@@ -1,15 +1,55 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using gymwebproject.Models;
+using gymwebproject.Repositorio;
+using gymwebproject.Repositorio.Data;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace gymwebproject.Controllers
 {
     public class usuarioController : Controller
     {
-        // GET: usuarioController
-        public ActionResult usuario()
+
+        private readonly ApplicationDbContext _context;
+        private readonly IRepoUsuario RepoUsuario;
+
+        public usuarioController(ApplicationDbContext context, IRepoUsuario RepoUsuario)
         {
+            _context = context;
+
+            this.RepoUsuario = RepoUsuario;
+        }
+        // GET: usuarioController
+        public ActionResult usuarioce()
+        {
+
+
             return View();
         }
+
+        public async Task<IActionResult> usuario()
+        {
+            // Obtener el correo de la sesión
+            string correo = HttpContext.Session.GetString("Correo");
+
+            if (string.IsNullOrEmpty(correo))
+            {
+                // Si no hay correo en sesión, redirige al login
+                return RedirectToAction("menu2", "Home");
+            }
+
+            // Llamar al repositorio para traer las compras de este usuario
+            var compras = await RepoUsuario.ListarComprasPorCorreo(correo);
+
+            // Si compras viene null, crear lista vacía
+            if (compras == null)
+            {
+                compras = new List<compraPmodel>();
+            }
+
+            return View(compras);
+        }
+
+
 
         // GET: usuarioController/Details/5
         public ActionResult Details(int id)
