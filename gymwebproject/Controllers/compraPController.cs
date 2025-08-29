@@ -38,24 +38,24 @@ namespace gymwebproject.Controllers
 
             return View("~/Views/planes/compraP.cshtml", modelo);
         }
-
         [HttpPost]
         public async Task<IActionResult> CompraP(compraPmodel pasarela)
         {
-            // 🔒 Fecha automática
             pasarela.FechaCompra = DateTime.Now;
 
             bool guardado = await repopasarela.compraP(pasarela);
 
             if (guardado)
             {
-                // Opcional: mostrar mensaje de éxito o redirigir
+                TempData["SuccessMessage"] = "✅ Compra realizada correctamente";
                 return RedirectToAction("menu2", "Home");
             }
 
-            ViewBag.Error = "No se pudo guardar la compra.";
+            TempData["ErrorMessage"] = "❌ No se pudo guardar la compra.";
             return View("~/Views/planes/compraP.cshtml", pasarela);
         }
+
+
 
 
 

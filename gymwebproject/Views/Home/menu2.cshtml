@@ -1,4 +1,28 @@
 ﻿@{
+    var successMessage = TempData["SuccessMessage"] as string;
+    var errorMessage = TempData["ErrorMessage"] as string;
+}
+
+@if (!string.IsNullOrEmpty(successMessage))
+{
+    <script>
+        window.onload = function () {
+            alert("@successMessage");
+        };
+    </script>
+}
+
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <script>
+        window.onload = function () {
+            alert("@errorMessage");
+        };
+    </script>
+}
+
+
+@{
     ViewData["Title"] = "Home Page";
 }
 <!DOCTYPE html>
