@@ -101,6 +101,9 @@ namespace gymwebproject.Controllers
                     // 🚨 Guardar datos en sesión:
                     HttpContext.Session.SetString("RolUsuario", usuario.rol);
                     HttpContext.Session.SetString("Correo", usuario.correo); // 🔑 se guarda el correo aquí
+                    HttpContext.Session.SetString("NombreUsuario", usuario.nombre);
+                    HttpContext.Session.SetString("CorreoUsuario", usuario.correo);
+
 
                     return View("~/Views/Home/menu2.cshtml");
                 }

@@ -20,25 +20,43 @@ namespace gymwebproject.Controllers
 
         }
 
-        public async Task<IActionResult> CompraP(compraPmodel pasarela, string plan, decimal precio)
+        public IActionResult CompraP(string plan, decimal precio)
         {
             ViewBag.PlanSeleccionado = plan;
             ViewBag.PrecioSeleccionado = precio;
 
-            // 🔒 Asignar fecha de creación automáticamente
-            pasarela.FechaCompra = DateTime.Now;
+            var nombreUsuario = HttpContext.Session.GetString("NombreUsuario");
+            var correoUsuario = HttpContext.Session.GetString("CorreoUsuario");
 
+            var modelo = new compraPmodel
+            {
+                nombre = nombreUsuario,
+                correo = correoUsuario,
+                suscripcion = plan,
+                precio = precio
+            };
+
+            return View("~/Views/planes/compraP.cshtml", modelo);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CompraP(compraPmodel pasarela)
+        {
+            // 🔒 Fecha automática
+            pasarela.FechaCompra = DateTime.Now;
 
             bool guardado = await repopasarela.compraP(pasarela);
 
             if (guardado)
             {
-                return View("~/Views/planes/compraP.cshtml");
+                // Opcional: mostrar mensaje de éxito o redirigir
+                return RedirectToAction("menu2", "Home");
             }
 
             ViewBag.Error = "No se pudo guardar la compra.";
             return View("~/Views/planes/compraP.cshtml", pasarela);
         }
+
 
 
 
