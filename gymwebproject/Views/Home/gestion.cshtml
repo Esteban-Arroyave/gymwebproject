@@ -31,15 +31,17 @@
             <h5 class="mb-4 text-center">Menú</h5>
             <button class="btn btn-outline-light" onclick="mostrarSeccion('precios')">Precios</button>
             <button class="btn btn-outline-light" onclick="mostrarSeccion('datos')">Datos</button>
-            <button class="btn btn-outline-light" onclick="mostrarSeccion('planes')">Planes de usuario</button>
-            <form asp-action="menu2" asp-controller="Home" method="get" class="m-0 p-0">
-                <button type="submit" class="btn btn-outline-light w-100">Inicio</button>
-            </form>
+           
 
 
            @*  planes usuario boton *@
             <form asp-action="PlanesUsuario" asp-controller="Planes" method="get" class="m-0 p-0">
                 <button type="submit" class="btn btn-outline-light w-100">Planes de Usuario</button>
+            </form>
+
+
+            <form asp-action="menu2" asp-controller="Home" method="get" class="m-0 p-0">
+                <button type="submit" class="btn btn-outline-light w-100">Inicio</button>
             </form>
 
 
@@ -116,13 +118,7 @@
                 </div>
             </div>
 
-            <!-- Sección PLANES -->
-            <div id="planes" style="display: none;">
-                <h2 class="text-center mb-4">📌 Planes de Usuario</h2>
-                <div class="card shadow p-4">
-                    <p>Aquí irá la gestión y listado de los planes adquiridos por los usuarios (enlazado con tus compras).</p>
-                </div>
-
+           
 
             </div>
         </div>
