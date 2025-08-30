@@ -106,7 +106,6 @@ namespace gymwebproject.Controllers
                         (!string.IsNullOrEmpty(p.suscripcion) && p.suscripcion.Contains(query, StringComparison.OrdinalIgnoreCase)) ||
                         p.precio.ToString().Contains(query, StringComparison.OrdinalIgnoreCase) || // numérico
                         (!string.IsNullOrEmpty(p.metodo) && p.metodo.Contains(query, StringComparison.OrdinalIgnoreCase)) ||
-                        p.numero.ToString().Contains(query, StringComparison.OrdinalIgnoreCase) || // numérico
                         (!string.IsNullOrEmpty(p.tarjeta) && p.tarjeta.Contains(query, StringComparison.OrdinalIgnoreCase)) ||
                         (!string.IsNullOrEmpty(p.estado) && p.estado.Contains(query, StringComparison.OrdinalIgnoreCase)) ||
                         (p.FechaCompra != null && p.FechaCompra.ToString("dd/MM/yyyy").Contains(query))

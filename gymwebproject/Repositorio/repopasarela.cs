@@ -34,8 +34,8 @@ namespace gymwebproject.Repositorio
                 using (var connection = new SqlConnection(cnx))
                 {
                     IsSuccess = await connection.ExecuteAsync(
-                        @"INSERT INTO registroC (nombre, correo, suscripcion, precio, Metodo, numero, tarjeta, estado, FechaCompra)
-                      VALUES (@nombre, @correo, @suscripcion, @precio, @Metodo, @numero, @tarjeta, @estado, @FechaCompra)",
+                        @"INSERT INTO registroC (nombre, correo, suscripcion, precio, Metodo, tarjeta, estado, FechaCompra)
+                      VALUES (@nombre, @correo, @suscripcion, @precio, @Metodo, @tarjeta, @estado, @FechaCompra)",
                         pasarela) > 0;
                 }
             }
